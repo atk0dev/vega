@@ -17,6 +17,7 @@ import { CounterComponent } from './components/counter/counter.component';
         CounterComponent,
         FetchDataComponent,
         HomeComponent
+        
     ],
     imports: [
         CommonModule,
