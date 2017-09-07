@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using vega.Persistence;
 
 namespace vega
 {
@@ -23,6 +26,11 @@ namespace vega
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+
+            //string connStr = Configuration["ConnectionStrings:Default"];
+            string connStr = Configuration.GetConnectionString("Default");
+            services.AddDbContext<VegaDbContext>(options => options.UseSqlServer(connStr));
             services.AddMvc();
         }
 
