@@ -1,0 +1,12 @@
+1. Add Vehicle
+POST http://localhost:5000/api/vehicles
+{
+    "modelId": 1,
+    "isRegistered": true,
+    "contact": {
+    	"name": "aaa",
+    	"email": "sss",
+    	"phone": "fff"
+    },
+    "features": [1,3]
+}
