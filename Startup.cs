@@ -28,6 +28,10 @@ namespace vega
         {
             services.AddAutoMapper();
 
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IModelRepository, ModelRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             //string connStr = Configuration["ConnectionStrings:Default"];
             string connStr = Configuration.GetConnectionString("Default");
             services.AddDbContext<VegaDbContext>(options => options.UseSqlServer(connStr));
