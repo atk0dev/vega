@@ -44,7 +44,7 @@ namespace vega.Persistence
 
         public void Remove(Vehicle vehicle)
         {
-            context.Vehicles.Add(vehicle);
+            context.Vehicles.Remove(vehicle);
         }
     }
 }
