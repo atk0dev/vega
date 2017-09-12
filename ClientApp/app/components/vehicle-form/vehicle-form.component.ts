@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
+import { ToastyService } from "ng2-toasty";
 
 
 @Component({
@@ -34,7 +35,8 @@ export class VehicleFormComponent implements OnInit {
   constructor(
     private vehicleService: VehicleService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private toastyService: ToastyService) {
 
     route.params.subscribe(p => {
       this.vehicle.id = +p['id'] || 0;
@@ -98,13 +100,13 @@ export class VehicleFormComponent implements OnInit {
   submit() {
     var result$ = (this.vehicle.id) ? this.vehicleService.update(this.vehicle) : this.vehicleService.create(this.vehicle);
     result$.subscribe(vehicle => {
-      // this.toastyService.success({
-      //   title: 'Success', 
-      //   msg: 'Data was sucessfully saved.',
-      //   theme: 'bootstrap',
-      //   showClose: true,
-      //   timeout: 5000
-      // });
+      this.toastyService.success({
+        title: 'Success', 
+        msg: 'Data was sucessfully saved.',
+        theme: 'bootstrap',
+        showClose: true,
+        timeout: 5000
+      });
       this.router.navigate(['/vehicles/', vehicle.id])
     });
   }

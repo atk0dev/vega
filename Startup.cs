@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -33,8 +32,11 @@ namespace vega
             services.AddAutoMapper();
 
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<IModelRepository, ModelRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IPhotoService, PhotoService>();
+            services.AddTransient<IPhotoStorage, FileSystemPhotoStorage>();
 
             //string connStr = Configuration["ConnectionStrings:Default"];
             string connStr = Configuration.GetConnectionString("Default");

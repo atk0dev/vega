@@ -1,3 +1,4 @@
+import { BrowserXhr } from '@angular/http';
 import { PhotoService } from './services/photo.service';
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error-handler';
@@ -6,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { ToastyModule } from 'ng2-toasty';
 
 import { VehicleService } from './services/vehicle.service';
 import { AppComponent } from './components/app/app.component';
@@ -34,6 +36,7 @@ import { BrowserXhrWithProgress, ProgressService } from './services/progress.ser
     imports: [
         CommonModule,
         HttpModule,
+        ToastyModule.forRoot(),
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
@@ -48,7 +51,9 @@ import { BrowserXhrWithProgress, ProgressService } from './services/progress.ser
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
         VehicleService,
-        PhotoService
+        PhotoService,
+        { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+        ProgressService
     ]
 })
 export class AppModuleShared {

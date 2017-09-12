@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   templateUrl: 'view-vehicle.html',
   providers: [
-    { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
-    ProgressService
+    //{ provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+    //ProgressService
   ]
 })
 export class ViewVehicleComponent implements OnInit {
@@ -69,7 +69,9 @@ export class ViewVehicleComponent implements OnInit {
           this.progress = progress;
         });
       },
-      error => console.error(error),
+      error => {
+        console.log(error);
+      },
       () => { this.progress = null; });
 
     var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
