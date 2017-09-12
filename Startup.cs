@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using vega.Core;
+using vega.Core.Models;
 using vega.Persistence;
 
 namespace vega
@@ -27,6 +28,7 @@ namespace vega
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
             services.AddAutoMapper();
 
             services.AddScoped<IVehicleRepository, VehicleRepository>();
