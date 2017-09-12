@@ -1,4 +1,3 @@
-import { Auth } from './../../services/auth.service';
 import { BrowserXhr } from '@angular/http';
 import { ProgressService, BrowserXhrWithProgress } from './../../services/progress.service';
 import { PhotoService } from './../../services/photo.service';
@@ -22,7 +21,6 @@ export class ViewVehicleComponent implements OnInit {
   progress: any;
 
   constructor(
-    private auth: Auth,
     private zone: NgZone,
     private route: ActivatedRoute,
     private router: Router,
@@ -71,11 +69,14 @@ export class ViewVehicleComponent implements OnInit {
           this.progress = progress;
         });
       },
-      null,
+      error => console.error(error),
       () => { this.progress = null; });
 
     var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
-    var file = nativeElement.files[0];
+    var file = {};
+    if (nativeElement.files != null && nativeElement.files[0] != null) {
+      file = nativeElement.files[0];
+    }
     nativeElement.value = '';
     this.photoService.upload(this.vehicleId, file)
       .subscribe(photo => {

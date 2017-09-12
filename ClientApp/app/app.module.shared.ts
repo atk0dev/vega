@@ -37,11 +37,10 @@ import { BrowserXhrWithProgress, ProgressService } from './services/progress.ser
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
-            { path: 'vehicles/new', component: VehicleFormComponent, canActivate: [ AuthGuard ] },
-            { path: 'vehicles/edit/:id', component: VehicleFormComponent, canActivate: [ AuthGuard ] },
+            { path: 'vehicles/new', component: VehicleFormComponent },
+            { path: 'vehicles/edit/:id', component: VehicleFormComponent },
             { path: 'vehicles/:id', component: ViewVehicleComponent },
             { path: 'vehicles', component: VehicleListComponent },
-            { path: 'admin', component: AdminComponent, canActivate: [ AdminAuthGuard ] },
             { path: 'home', component: HomeComponent },
             { path: '**', redirectTo: 'home' }
         ])

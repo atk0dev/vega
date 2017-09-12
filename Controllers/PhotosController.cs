@@ -17,7 +17,7 @@ namespace vega.Controllers
     [Route("/api/vehicles/{vehicleId}/photos")]
     public class PhotosController : Controller
     {
-        \private readonly IHostingEnvironment host;
+        private readonly IHostingEnvironment host;
         private readonly IVehicleRepository vehicleRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -77,8 +77,8 @@ namespace vega.Controllers
                 Directory.CreateDirectory(uploadsFolderPath);
             }
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(uploadsFolderPath, fileName);
-            using (var stream = new FileStream(filePath, File.Create))
+            string filePath = Path.Combine(uploadsFolderPath, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
